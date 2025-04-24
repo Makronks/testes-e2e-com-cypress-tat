@@ -36,7 +36,7 @@ describe.only('Scenarios where authentication is a pre-condition', () => {
 
 it.only('logs out', () => {
   cy.guiLogin()
-  
+
 
   if (Cypress.config('viewportWidth') < Cypress.env('viewportWidthBreakpoint')) {
     cy.get('.navbar-toggle.collapsed')
