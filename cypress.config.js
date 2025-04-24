@@ -11,8 +11,8 @@ module.exports = defineConfig({
     
     defaultCommandTimeout: 8000,
     
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
   },
+
+  projectId: 'krfy5c'
+
 })

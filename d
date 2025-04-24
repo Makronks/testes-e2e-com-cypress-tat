@@ -1,0 +1,57 @@
+warning: in the working copy of 'cypress.config.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml[m
+[1mindex d027b8c..447e8c4 100644[m
+[1m--- a/.github/workflows/ci.yml[m
+[1m+++ b/.github/workflows/ci.yml[m
+[36m@@ -30,8 +30,9 @@[m [mjobs:[m
+           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}[m
+           CYPRESS_MAILOSAUR_SERVER_ID: ${{ secrets.CYPRESS_MAILOSAUR_SERVER_ID }}[m
+           CYPRESS_MAILOSAUR_API_KEY: ${{ secrets.CYPRESS_MAILOSAUR_API_KEY }}[m
+[32m+[m[32m          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}[m
+         with:[m
+[31m-          command: npm test[m
+[32m+[m[32m          command: npm run test:cloud[m
+   cypress-tests-tablet:[m
+     needs: eslint[m
+     runs-on: ubuntu-22.04[m
+[36m@@ -43,5 +44,5 @@[m [mjobs:[m
+         env:[m
+           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}[m
+           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}[m
+[31m-        with:[m
+[31m-          command: npm run test:tablet[m
+[32m+[m[32m          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}[m
+[32m+[m[32m          command: npm run test:tablet:cloud[m
+[1mdiff --git a/cypress.config.js b/cypress.config.js[m
+[1mindex 0e68caa..432b8ba 100644[m
+[1m--- a/cypress.config.js[m
+[1m+++ b/cypress.config.js[m
+[36m@@ -11,8 +11,8 @@[m [mmodule.exports = defineConfig({[m
+     [m
+     defaultCommandTimeout: 8000,[m
+     [m
+[31m-    setupNodeEvents(on, config) {[m
+[31m-      // implement node event listeners here[m
+[31m-    },[m
+   },[m
+[32m+[m
+[32m+[m[32m  projectId: 'krfy5c'[m
+[32m+[m
+ })[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 5f0325f..2dbd627 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -9,7 +9,10 @@[m
+     "test": "cypress run",[m
+     "test:tablet": "cypress run --config viewportWidth=767,viewportHeight=480 --spec cypress/e2e/authenticated.cy.js",[m
+     "lint": "eslint cypress/**/*.js && eslint cypress.config.js",[m
+[31m-    "lint:fix": "eslint cypress/**/*.js --fix && eslint cypress.config.js --fix"[m
+[32m+[m[32m    "lint:fix": "eslint cypress/**/*.js --fix && eslint cypress.config.js --fix",[m
+[32m+[m[32m    "test:cloud": "cypress run --record --tag 'desktop'",[m
+[32m+[m[32m    "test:table": "cypress run --config viewportWidth=767,viewportHeight=480 --spec cypress/e2e/authenticated.cy.js",[m
+[32m+[m[32m    "test:tablet:cloud": "cypress run --record --tag 'tablet' --config viewportWidth=767,viewportHeight=480 --spec cypress/e2e/authenticated.cy.js"[m
+   },[m
+   "keywords": [],[m
+   "author": "Joaquim Lopes",[m
