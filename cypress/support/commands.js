@@ -1,5 +1,3 @@
-// cypress/support/commands.js
-
 Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
   cy.intercept('GET', '**/notes').as('getNotes')
   cy.visit('/signup')
@@ -10,16 +8,11 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
   cy.get('#confirmationCode').should('be.visible')
   cy.mailosaurGetMessage(Cypress.env('MAILOSAUR_SERVER_ID'), {
     sentTo: email
-  }).then(message => {
-    const confirmationCode = message.html.body.match(/\d{6}/)[0]
-    cy.get('#confirmationCode').type(`${confirmationCode}{enter}`)
+  }).then(({ html }) => {
+    cy.get('#confirmationCode').type(`${html.codes[0].value}{enter}`)
     cy.wait('@getNotes')
   })
 })
-
-// cypress/support/commands.js
-
-// ... Comando de signup aqui
 
 Cypress.Commands.add('guiLogin', (
   username = Cypress.env('USER_EMAIL'),
@@ -91,6 +84,7 @@ Cypress.Commands.add('deleteNote', note => {
   cy.contains('.list-group-item', note)
     .should('not.exist')
 })
+
 Cypress.Commands.add('fillSettingsFormAndSubmit', () => {
   cy.visit('/settings')
   cy.get('#storage').type('1')

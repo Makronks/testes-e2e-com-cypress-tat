@@ -1,6 +1,6 @@
 
-import './commands'
-
-import 'cypress-mailosaur'
 
 import 'cypress-iframe'
+import 'cypress-mailosaur'
+
+import './commands'
