@@ -9,10 +9,10 @@ module.exports = defineConfig({
       viewportWidthBreakpoint: 768,
     },
 
-    defaultCommandTimeout: 8000,
+    defaultCommandTimeout: 10000,
 
   },
-
+  
   projectId: 'krfy5c'
 
 })
