@@ -13,6 +13,6 @@ module.exports = defineConfig({
 
   },
 
-  projectId: "45oi8k"
+  projectId: '45oi8k'
 
 })
