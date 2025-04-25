@@ -12,7 +12,7 @@ module.exports = defineConfig({
     defaultCommandTimeout: 10000,
 
   },
-  
+
   projectId: 'krfy5c'
 
 })
